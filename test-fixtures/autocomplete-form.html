@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Autocomplete Form</title>
+  <style>
+    .hidden { display: none; }
+    .success-container, .error-message { display: none; }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Autocomplete Form</h1>
+    <label for="input-field">Enter a value:</label>
+    <input type="text" id="input-field" placeholder="Type here..." aria-label="Enter a value">
+    <ul class="suggestions" aria-label="Suggestions"></ul>
+    <button id="next-button" type="button">Next</button>
+    <span class="error-message" role="alert">Error: Invalid input. Please select a valid suggestion.</span>
+    <div class="success-container" role="status">
+      <p>Success! Your response has been recorded.</p>
+    </div>
+  </div>
+  <script>
+    const suggestions = [
+      'agile methodology',
+      'agile methodology process',
+      'agile methodology process testing'
+    ];
+    const input = document.querySelector('#input-field');
+    const list = document.querySelector('.suggestions');
+    const next = document.querySelector('#next-button');
+    const error = document.querySelector('.error-message');
+    const success = document.querySelector('.success-container');
+    let selected = false;
+
+    function render(value = '') {
+      const v = value.toLowerCase();
+      list.innerHTML = '';
+      suggestions
+        .filter(s => s.toLowerCase().startsWith(v))
+        .forEach(s => {
+          const li = document.createElement('li');
+          li.textContent = s;
+          li.tabIndex = 0;
+          li.addEventListener('click', () => {
+            input.value = s;
+            selected = true;
+            error.style.display = 'none';
+          });
+          list.appendChild(li);
+        });
+    }
+
+    input.addEventListener('input', e => {
+      selected = false;
+      success.style.display = 'none';
+      render(e.target.value);
+    });
+
+    next.addEventListener('click', () => {
+      if (!selected || !suggestions.includes(input.value)) {
+        error.style.display = 'inline';
+        success.style.display = 'none';
+        return;
+      }
+      error.style.display = 'none';
+      success.style.display = 'block';
+    });
+
+    render();
+  </script>
+</body>
+</html>
