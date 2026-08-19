@@ -1,0 +1,72 @@
+
+{
+  "note": "Submission-safe transcript of the AI-assisted work performed for the SDET practical assignment. The transcript captures the user prompts and AI responses used during the assignment. It does not include hidden system/developer instructions or private model reasoning.",
+  "assignment": "Practical Assignment - SDET",
+  "ai_tool": "ChatGPT",
+  "messages": [
+    {
+      "role": "user",
+      "content": "I am working on an SDET practical assignment. I have attached the assignment document. Please analyze the requirements from an SDET perspective and help me create a professional, risk-based solution. Treat the assignment document as the source of truth and do not invent requirements that are not specified."
+    },
+    {
+      "role": "assistant",
+      "content": "Reviewed the assignment requirements and identified the key areas requiring coverage: risk-based test scenarios, FR-05 API contract analysis, detailed UI/API test cases, Playwright automation using Page Object Model, API contract and negative testing, AI usage documentation, architecture discussion, README, prompt files, and the required AI conversation transcript."
+    },
+    {
+      "role": "user",
+      "content": "Based on the requirements, identify the top 10 test scenarios and rank them from highest to lowest risk. For each scenario include a summary, risk level, and rationale. Prioritize business impact, data integrity, API contract failures, and critical user journeys over cosmetic issues."
+    },
+    {
+      "role": "assistant",
+      "content": "Created a risk-based list of 10 scenarios, prioritizing successful persistence, invalid submission handling, suggestion filtering, timestamp correctness, locale validation, completed status, suggestion_list accuracy, keyboard interaction, suggestion selection, and boundary input behavior."
+    },
+    {
+      "role": "user",
+      "content": "Analyze the API response provided in the assignment against FR-05. Identify every discrepancy. Be careful not to classify something as a defect unless the requirement supports it. In particular, distinguish data type issues, timestamp timezone representation, and BCP 47 locale validity."
+    },
+    {
+      "role": "assistant",
+      "content": "Identified the incorrect completed data type because the response contains the string \"true\" instead of a Boolean. Identified the timestamp issue because the response uses UTC Z notation while the requirement specifies the user's local time. For locale, distinguished BCP 47 syntax from the expected configured user locale instead of automatically treating \"en\" as invalid."
+    },
+    {
+      "role": "user",
+      "content": "Design at least 8 detailed test cases covering both UI and API behavior. Each test case should contain an ID, title, preconditions, numbered steps, expected results, and test data. Ensure the cases cover the defects identified from the API response."
+    },
+    {
+      "role": "assistant",
+      "content": "Created detailed test cases covering valid submission, invalid input, prefix filtering, no-match filtering, configurable match-anywhere behavior, locale persistence, timestamp validation, suggestion_list validation, keyboard navigation, and Escape interaction."
+    },
+    {
+      "role": "user",
+      "content": "Create maintainable Playwright automation in TypeScript. Use Page Object Model. Cover Tab navigation, Enter, Escape, suggestion filtering, suggestion selection, valid and invalid submission, and success/error messages. Avoid hard-coded waits and keep environment-specific values configurable."
+    },
+    {
+      "role": "assistant",
+      "content": "Designed a Playwright TypeScript framework using Page Object Model, separated test data, environment configuration, reusable locators and actions, meaningful assertions, and Playwright diagnostics such as traces, screenshots, video, and HTML reporting."
+    },
+    {
+      "role": "user",
+      "content": "Create API automation for FR-05. Validate required fields, data types, timestamp format, locale format, completed as a Boolean, suggestion_list matching, and at least two negative scenarios. Do not invent the API endpoint or authentication mechanism because those details are not provided."
+    },
+    {
+      "role": "assistant",
+      "content": "Created API contract validation using runtime schema validation and added negative scenarios for missing required fields and an invalid completed data type. The API endpoint was externalized through environment variables rather than invented."
+    },
+    {
+      "role": "user",
+      "content": "Review the proposed solution as a senior SDET. Identify assumptions, missing coverage, flaky-test risks, weak assertions, maintainability issues, API validation gaps, and CI/CD concerns. Explain what should be improved before final submission."
+    },
+    {
+      "role": "assistant",
+      "content": "Reviewed the solution from a senior SDET perspective and highlighted the importance of avoiding unsupported assumptions, separating UI and API concerns, using runtime contract validation, externalizing environment-specific configuration, improving failure diagnostics, and ensuring the automation remains maintainable and CI/CD-ready."
+    },
+    {
+      "role": "user",
+      "content": "Prepare the final AI reflection required by the assignment. Explain which AI tool was used, what it was used for, at least two specific modifications made to the AI output, and at least one limitation of AI."
+    },
+    {
+      "role": "assistant",
+      "content": "Prepared an AI reflection explaining the use of ChatGPT for requirement decomposition, risk analysis, test design, automation structure, and code review. Documented human modifications including careful locale interpretation, timestamp handling, runtime schema validation, and avoiding invented API details. Also documented AI's tendency to assume unspecified implementation details."
+    }
+  ]
+}
